@@ -6,9 +6,20 @@
  */
 
 // Includes
+#ifndef WPILIB_DEFINE
+#define WPILIB_DEFINE
 #include "WPILib.h"
+#endif
+
+#ifndef STATE_MACHINE_DEFINE
+#define STATE_MACHINE_DEFINE
 #include "StateMachine.cpp"
+#endif
+
+#ifndef CAMERA_SERVO_DEFINE
+#define CAMERA_SERVO_DEFINE
 #include "CameraServo.cpp"
+#endif
 
 // Motor ports configuration.
 static const int PAN_MOTOR  = 9;
