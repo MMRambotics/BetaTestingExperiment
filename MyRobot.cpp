@@ -27,34 +27,9 @@ class MyRobot : public IterativeRobot {
 		
 		~MyRobot() {}
 	
-		// Power-on initialization.
-		void RobotInit() {
-			FeedWatchdog();
-		}
-		
-		// Called when robot gets disabled.
-		void DisabledInit() {
-		}
-		
-		// Autonomous initialization.
-		void AutonomousInit() {
-			FeedWatchdog();
-		}
-		
-		// Tele Operated initialization.
 		void TeleopInit() {
 			FeedWatchdog();
 			moveCamera.SetToCenter();
-		}
-		
-		// Called at 100Hz during autonomous.
-		void AutonomousPeriodic() {
-			FeedWatchdog();
-		}
-		
-		// Called at 100Hz during tele operated.
-		void TeleopPeriodic() {
-			FeedWatchdog();
 		}
 		
 	private:
