@@ -45,8 +45,13 @@ class MyRobot : public IterativeRobot {
 		~MyRobot() {}
 	
 		void TeleopInit() {
+			EnableWatchdog();
 			FeedWatchdog();
 			moveCamera.SetToCenter();
+		}
+		
+		void TeleopPeriodic() {
+			FeedWatchdog();
 		}
 		
 	private:
