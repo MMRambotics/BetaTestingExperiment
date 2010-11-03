@@ -16,6 +16,11 @@
 #include "StateMachine.cpp"
 #endif
 
+// State Machine constants.
+static const int CAMERA_MOVEMENT = 1;
+static const int LOCKED   = 1;
+static const int UNLOCKED = 2;
+
 class CameraServo {
 	
 	Servo pan;
@@ -55,6 +60,7 @@ class CameraServo {
 			PAN_RIGHT_MULTIPLIER   = panLeftDirection * -1;
 			TILT_UP_MULTIPLIER     = tiltUpDirection;
 			TILT_DOWN_MULTIPLIER   = tiltUpDirection * -1;
+			
 		}
 		
 		/*
