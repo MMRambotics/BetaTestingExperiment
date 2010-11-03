@@ -5,7 +5,12 @@
  * @description: Controls camera servos.
  */
 
+// Includes
 #include "WPILib.h"
+
+// Configuration
+static const float CAMERA_PAN_CENTER  = 0.5;
+static const float CAMERA_TILT_CENTER = 0.3;
 
 class CameraServo {
 	
@@ -21,8 +26,8 @@ class CameraServo {
 		
 
 		void SetToCenter() {
-			pan.Set(0.5);
-			tilt.Set(0.3);
+			pan.Set(CAMERA_PAN_CENTER);
+			tilt.Set(CAMERA_TILT_CENTER);
 		}
 		
 };
