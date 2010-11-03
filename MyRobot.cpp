@@ -10,9 +10,15 @@
 #include "StateMachine.cpp"
 #include "CameraServo.cpp"
 
-// Motor ports.
+// Motor ports configuration.
 static const int PAN_MOTOR  = 9;
 static const int TILT_MOTOR = 10;
+
+// Camera movement configuration.
+static const float CAMERA_PAN_CENTER  = 0.5;
+static const float CAMERA_TILT_CENTER = 0.3;
+static const float PAN_LEFT_DIRECTION = 1.0; 
+static const float TILT_UP_DIRECTION  = 1.0;
 
 // Main class.
 class MyRobot : public IterativeRobot {
@@ -22,7 +28,7 @@ class MyRobot : public IterativeRobot {
 	public:
 		
 		MyRobot():
-			moveCamera(PAN_MOTOR, TILT_MOTOR)
+			moveCamera(PAN_MOTOR, TILT_MOTOR, CAMERA_PAN_CENTER, CAMERA_TILT_CENTER, PAN_LEFT_DIRECTION, TILT_UP_DIRECTION)
 		{}
 		
 		~MyRobot() {}
