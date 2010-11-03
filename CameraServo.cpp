@@ -30,4 +30,40 @@ class CameraServo {
 			tilt.Set(CAMERA_TILT_CENTER);
 		}
 		
+		bool PanLeft(int positionOffset = 0.05) {
+			float currentPosition = pan.Get();
+			if (currentPosition == 0.0)
+				return false;
+			
+			pan.Set(currentPosition - positionOffset);
+			return true;
+		}
+		
+		bool PanRight(int positionOffset = 0.05) {
+			float currentPosition = pan.Get();
+			if (currentPosition == 1.0)
+				return false;
+			
+			pan.Set(currentPosition + positionOffset);
+			return true;
+		}
+		
+		bool TiltUp(int positionOffset = 0.05) {
+			float currentPosition = tilt.Get();
+			if (currentPosition == 0.0)
+				return false;
+			
+			tilt.Set(currentPosition - positionOffset);
+			return true;
+		}
+		
+		bool TiltDown(int positionOffset = 0.05) {
+			float currentPosition = tilt.Get();
+			if (currentPosition == 1.0)
+				return true;
+			
+			tilt.Set(currentPosition + positionOffset);
+			return true;
+		}
+		
 };
