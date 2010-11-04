@@ -20,6 +20,7 @@ class Print {
 	
 	DriverStationLCD *driverStation;
 	DriverStationLCD::Line userLines[6];
+	int currentLine;
 	
 	public:
 	
@@ -31,10 +32,13 @@ class Print {
 			userLines[3]  = DriverStationLCD::kUser_Line4;
 			userLines[4]  = DriverStationLCD::kUser_Line5;
 			userLines[5]  = DriverStationLCD::kUser_Line6;
+			currentLine   = 0;
 		}
 		
 		void PrintText(char *text) {
-			driverStation->Printf(userLines[0], 1, text);
+			// todo: actually iterate currentLine
+			driverStation->Printf(userLines[currentLine], 1, text);
+			driverStation->UpdateLCD();
 		}
 		
 };
