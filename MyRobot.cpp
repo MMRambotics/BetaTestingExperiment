@@ -21,6 +21,11 @@
 #include "CameraServo.cpp"
 #endif
 
+#ifndef GYRO_DEFINE
+#define GYRO_DEFINE
+#include "Gyro.cpp"
+#endif
+
 // Motor ports configuration.
 static const int PAN_MOTOR  = 9;
 static const int TILT_MOTOR = 10;
@@ -31,15 +36,20 @@ static const float CAMERA_TILT_CENTER = 0.3;
 static const float PAN_LEFT_DIRECTION = 1.0; 
 static const float TILT_UP_DIRECTION  = 1.0;
 
+// Sensor port configuration.
+static const int GYRO_PORT = 1;
+
 // Main class.
 class MyRobot : public IterativeRobot {
 	
 	CameraServo moveCamera;
+	EasyGyro    gyro;
 	
 	public:
 		
 		MyRobot():
-			moveCamera(PAN_MOTOR, TILT_MOTOR, CAMERA_PAN_CENTER, CAMERA_TILT_CENTER, PAN_LEFT_DIRECTION, TILT_UP_DIRECTION)
+			moveCamera(PAN_MOTOR, TILT_MOTOR, CAMERA_PAN_CENTER, CAMERA_TILT_CENTER, PAN_LEFT_DIRECTION, TILT_UP_DIRECTION),
+			gyro(GYRO_PORT)
 		{}
 		
 		~MyRobot() {}
