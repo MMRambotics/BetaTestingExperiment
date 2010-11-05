@@ -26,6 +26,13 @@
 #include "Gyro.cpp"
 #endif
 
+#ifndef PRINT_DEFINE
+#define PRINT_DEFINE
+#include "Print.cpp"
+#endif
+
+#include <stdio.h>
+
 // Motor ports configuration.
 static const int PAN_MOTOR  = 9;
 static const int TILT_MOTOR = 10;
@@ -44,12 +51,14 @@ class MyRobot : public IterativeRobot {
 	
 	CameraServo moveCamera;
 	EasyGyro    gyro;
+	Print       print;
 	
 	public:
 		
 		MyRobot():
 			moveCamera(PAN_MOTOR, TILT_MOTOR, CAMERA_PAN_CENTER, CAMERA_TILT_CENTER, PAN_LEFT_DIRECTION, TILT_UP_DIRECTION),
-			gyro(GYRO_PORT)
+			gyro(GYRO_PORT),
+			print()
 		{}
 		
 		~MyRobot() {}
@@ -62,6 +71,9 @@ class MyRobot : public IterativeRobot {
 		
 		void TeleopPeriodic() {
 			FeedWatchdog();
+			char gyroHeading[80];
+			sprintf(gyroHeading, "%f", gyro.GetGyroHeading());
+			print.PrintText(gyroHeading);
 		}
 		
 	private:
