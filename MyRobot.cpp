@@ -82,6 +82,7 @@ class MyRobot : public IterativeRobot {
 			sprintf(gyroHeading, "%f", gyro.GetGyroHeading());
 			print.PrintText(gyroHeading);*/
 			camera.GetImage();
+			FeedWatchdog();
 		}
 		
 	private:
