@@ -21,6 +21,11 @@
 #include "CameraServo.cpp"
 #endif
 
+#ifndef CAMERA_DEFINE
+#define CAMERA_DEFINE
+#include "Camera.cpp"
+#endif
+
 #ifndef GYRO_DEFINE
 #define GYRO_DEFINE
 #include "Gyro.cpp"
@@ -52,13 +57,15 @@ class MyRobot : public IterativeRobot {
 	CameraServo moveCamera;
 	EasyGyro    gyro;
 	Print       print;
+	EasyCamera  camera;
 	
 	public:
 		
 		MyRobot():
 			moveCamera(PAN_MOTOR, TILT_MOTOR, CAMERA_PAN_CENTER, CAMERA_TILT_CENTER, PAN_LEFT_DIRECTION, TILT_UP_DIRECTION),
 			gyro(GYRO_PORT),
-			print()
+			print(),
+			camera()
 		{}
 		
 		~MyRobot() {}

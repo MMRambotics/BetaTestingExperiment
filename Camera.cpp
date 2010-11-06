@@ -11,5 +11,11 @@
 #endif
 
 class EasyCamera {
+
+	public:
 	
+		EasyCamera() {
+			
+		}
+		
 };
