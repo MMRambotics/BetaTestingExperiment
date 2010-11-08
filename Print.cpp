@@ -36,7 +36,8 @@ class Print {
 		}
 		
 		void ClearDisplay() {
-			driverStation->Clear();
+			currentLine = 0;
+			driverStation->Clear(); 
 		}
 		
 		void PrintText(char *text) {

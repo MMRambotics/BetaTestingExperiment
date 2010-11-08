@@ -129,7 +129,7 @@ class MyRobot : public IterativeRobot {
 			if (testSwitch.IsOn()) {
 				print.PrintText("Switch is on!");
 			} else {
-				print.PrintText("Switch if off!");
+				print.PrintText("Switch is off!");
 			}
 		}
 	
