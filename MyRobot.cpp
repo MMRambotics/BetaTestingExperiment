@@ -39,6 +39,11 @@
 #include "Print.cpp"
 #endif
 
+#ifndef LIGHT_SWITCH_DEFINE
+#define LIGHT_SWITCH_DEFINE
+#include "LightSwitch.cpp"
+#endif
+
 #include <stdio.h>
 
 // Motor ports configuration.
@@ -67,6 +72,7 @@ class MyRobot : public IterativeRobot {
 	EasyCamera  camera;
 	Joystick    joystickLeft;
 	Joystick    joystickRight;
+	LightSwitch testSwitch;
 	
 	public:
 		
@@ -76,7 +82,8 @@ class MyRobot : public IterativeRobot {
 			print(),
 			camera(),
 			joystickLeft(JOYSTICK_LEFT),
-			joystickRight(JOYSTICK_RIGHT)
+			joystickRight(JOYSTICK_RIGHT),
+			testSwitch(14)
 		{}
 		
 		~MyRobot() {}
@@ -116,6 +123,12 @@ class MyRobot : public IterativeRobot {
 			char gyroHeading[40];
 			sprintf(gyroHeading, "%f", gyro.GetGyroHeading());
 			print.PrintText(gyroHeading);
+			
+			if (testSwitch.IsOn()) {
+				print.PrintText("Switch is on!");
+			} else {
+				print.PrintText("Switch if off!");
+			}
 		}
 	
 };
