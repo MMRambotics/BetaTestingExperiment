@@ -97,8 +97,8 @@ class MyRobot : public IterativeRobot {
 		void TeleopPeriodic() {
 			FeedWatchdog();
 			
-			//camera.GetImage();
-			//moveCamera.JoystickControl(joystickLeft);
+			camera.GetImage();
+			moveCamera.JoystickControl(joystickLeft);
 			
 			#ifdef DEBUG
 			Debug();
