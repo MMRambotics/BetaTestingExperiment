@@ -78,11 +78,10 @@ class MyRobot : public IterativeRobot {
 		
 		void TeleopPeriodic() {
 			FeedWatchdog();
-			/*char gyroHeading[80];
-			sprintf(gyroHeading, "%f", gyro.GetGyroHeading());
-			print.PrintText(gyroHeading);*/
+			
 			camera.GetImage();
-			FeedWatchdog();
+			
+			Debug(false);
 		}
 		
 	private:
@@ -97,6 +96,14 @@ class MyRobot : public IterativeRobot {
 		
 		void FeedWatchdog() {
 			GetWatchdog().Feed();
+		}
+		
+		void Debug(bool debug) {
+			if (debug) {
+				char gyroHeading[40];
+				sprintf(gyroHeading, "%f", gyro.GetGyroHeading());
+				print.PrintText(gyroHeading);
+			}
 		}
 	
 };
