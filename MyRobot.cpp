@@ -45,11 +45,15 @@ static const int TILT_MOTOR = 10;
 // Camera movement configuration.
 static const float CAMERA_PAN_CENTER  = 0.5;
 static const float CAMERA_TILT_CENTER = 0.3;
-static const float PAN_LEFT_DIRECTION = 1.0; 
+static const float PAN_LEFT_DIRECTION = -1.0; 
 static const float TILT_UP_DIRECTION  = 1.0;
 
 // Sensor port configuration.
 static const int GYRO_PORT = 1;
+
+// Joystick port configuration
+static const int JOYSTICK_LEFT  = 1;
+static const int JOYSTICK_RIGHT = 2;
 
 // Main class.
 class MyRobot : public IterativeRobot {
@@ -58,6 +62,8 @@ class MyRobot : public IterativeRobot {
 	EasyGyro    gyro;
 	Print       print;
 	EasyCamera  camera;
+	Joystick    joystickLeft;
+	Joystick    joystickRight;
 	
 	public:
 		
@@ -65,7 +71,9 @@ class MyRobot : public IterativeRobot {
 			moveCamera(PAN_MOTOR, TILT_MOTOR, CAMERA_PAN_CENTER, CAMERA_TILT_CENTER, PAN_LEFT_DIRECTION, TILT_UP_DIRECTION),
 			gyro(GYRO_PORT),
 			print(),
-			camera()
+			camera(),
+			joystickLeft(JOYSTICK_LEFT),
+			joystickRight(JOYSTICK_RIGHT)
 		{}
 		
 		~MyRobot() {}
@@ -80,6 +88,7 @@ class MyRobot : public IterativeRobot {
 			FeedWatchdog();
 			
 			camera.GetImage();
+			moveCamera.JoystickControl(joystickLeft);
 			
 			Debug(false);
 		}

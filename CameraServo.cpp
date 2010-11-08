@@ -21,6 +21,12 @@ static const int CAMERA_MOVEMENT = 1;
 static const int LOCKED   = 1;
 static const int UNLOCKED = 2;
 
+// Joystick Buttons
+static const int JOYSTICK_TOP_UP    = 3;
+static const int JOYSTICK_TOP_DOWN  = 2;
+static const int JOYSTICK_TOP_LEFT  = 4;
+static const int JOYSTICK_TOP_RIGHT = 5;
+
 class CameraServo {
 	
 	Servo pan;
@@ -63,6 +69,18 @@ class CameraServo {
 			
 		}
 		
+		void JoystickControl(Joystick &joystick) {
+			if (joystick.GetRawButton(JOYSTICK_TOP_UP)) 
+				TiltUp();
+			else if (joystick.GetRawButton(JOYSTICK_TOP_DOWN))
+				TiltDown();
+		
+			if (joystick.GetRawButton(JOYSTICK_TOP_LEFT))
+				PanLeft();
+			else if (joystick.GetRawButton(JOYSTICK_TOP_RIGHT))
+				PanRight();
+		}
+		
 		/*
 		 * Sets the camera to it's center position.
 		 */
@@ -78,7 +96,7 @@ class CameraServo {
 		 * take to the left.  Default is 0.05.  It would take 20 steps to go 
 		 * from 0.0 to 1.0.
 		 */
-		bool PanLeft(float positionOffset = 0.05) {
+		bool PanLeft(float positionOffset = 0.01) {
 			float currentPosition = pan.Get();
 			if (currentPosition == 0.0)
 				return false;
@@ -94,7 +112,7 @@ class CameraServo {
 		 * take to the right.  Default is 0.05.  It would take 20 steps to go
 		 * from 0.0 to 1.0.
 		 */
-		bool PanRight(float positionOffset = 0.05) {
+		bool PanRight(float positionOffset = 0.01) {
 			float currentPosition = pan.Get();
 			if (currentPosition == 1.0)
 				return false;
@@ -110,9 +128,9 @@ class CameraServo {
 		 * tilt up by.  Default is 0.05.  It would take 20 steps to go from 0.0
 		 * to 1.0.
 		 */
-		bool TiltUp(float positionOffset = 0.05) {
+		bool TiltUp(float positionOffset = 0.01) {
 			float currentPosition = tilt.Get();
-			if (currentPosition == 0.0)
+			if (currentPosition == 0.1)
 				return false;
 			
 			tilt.Set(currentPosition + (positionOffset * TILT_UP_MULTIPLIER));
@@ -126,9 +144,9 @@ class CameraServo {
 		 * tilt down by.  Default is 0.05.  It would take 20 steps to go from 
 		 * 0.0 to 1.0.
 		 */
-		bool TiltDown(float positionOffset = 0.05) {
+		bool TiltDown(float positionOffset = 0.01) {
 			float currentPosition = tilt.Get();
-			if (currentPosition == 1.0)
+			if (currentPosition == 0.9)
 				return true;
 			
 			tilt.Set(currentPosition + (positionOffset * TILT_DOWN_MULTIPLIER));
