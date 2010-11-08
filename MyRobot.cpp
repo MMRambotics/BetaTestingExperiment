@@ -97,8 +97,8 @@ class MyRobot : public IterativeRobot {
 		void TeleopPeriodic() {
 			FeedWatchdog();
 			
-			camera.GetImage();
-			moveCamera.JoystickControl(joystickLeft);
+			//camera.GetImage();
+			//moveCamera.JoystickControl(joystickLeft);
 			
 			#ifdef DEBUG
 			Debug();
@@ -120,6 +120,8 @@ class MyRobot : public IterativeRobot {
 		}
 		
 		void Debug() {
+			print.ClearDisplay();
+			
 			char gyroHeading[40];
 			sprintf(gyroHeading, "%f", gyro.GetGyroHeading());
 			print.PrintText(gyroHeading);
