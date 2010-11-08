@@ -5,6 +5,9 @@
  * @description: Random beta experiments to complete task five.
  */
 
+// Preprocessor configurations
+#define DEBUG 
+
 // Includes
 #ifndef WPILIB_DEFINE
 #define WPILIB_DEFINE
@@ -90,7 +93,9 @@ class MyRobot : public IterativeRobot {
 			camera.GetImage();
 			moveCamera.JoystickControl(joystickLeft);
 			
-			Debug(false);
+			#ifdef DEBUG
+			Debug();
+			#endif
 		}
 		
 	private:
@@ -107,12 +112,10 @@ class MyRobot : public IterativeRobot {
 			GetWatchdog().Feed();
 		}
 		
-		void Debug(bool debug) {
-			if (debug) {
-				char gyroHeading[40];
-				sprintf(gyroHeading, "%f", gyro.GetGyroHeading());
-				print.PrintText(gyroHeading);
-			}
+		void Debug() {
+			char gyroHeading[40];
+			sprintf(gyroHeading, "%f", gyro.GetGyroHeading());
+			print.PrintText(gyroHeading);
 		}
 	
 };
