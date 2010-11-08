@@ -27,6 +27,9 @@ static const int JOYSTICK_TOP_DOWN  = 2;
 static const int JOYSTICK_TOP_LEFT  = 4;
 static const int JOYSTICK_TOP_RIGHT = 5;
 
+// Defaults
+static const float DEFAULT_POSITION_INCREMENT = 0.01;
+
 class CameraServo {
 	
 	Servo pan;
@@ -96,7 +99,7 @@ class CameraServo {
 		 * take to the left.  Default is 0.05.  It would take 20 steps to go 
 		 * from 0.0 to 1.0.
 		 */
-		bool PanLeft(float positionOffset = 0.01) {
+		bool PanLeft(float positionOffset = DEFAULT_POSITION_INCREMENT) {
 			float currentPosition = pan.Get();
 			if (currentPosition == 0.0)
 				return false;
@@ -112,7 +115,7 @@ class CameraServo {
 		 * take to the right.  Default is 0.05.  It would take 20 steps to go
 		 * from 0.0 to 1.0.
 		 */
-		bool PanRight(float positionOffset = 0.01) {
+		bool PanRight(float positionOffset = DEFAULT_POSITION_INCREMENT) {
 			float currentPosition = pan.Get();
 			if (currentPosition == 1.0)
 				return false;
@@ -128,7 +131,7 @@ class CameraServo {
 		 * tilt up by.  Default is 0.05.  It would take 20 steps to go from 0.0
 		 * to 1.0.
 		 */
-		bool TiltUp(float positionOffset = 0.01) {
+		bool TiltUp(float positionOffset = DEFAULT_POSITION_INCREMENT) {
 			float currentPosition = tilt.Get();
 			if (currentPosition == 0.1)
 				return false;
@@ -144,7 +147,7 @@ class CameraServo {
 		 * tilt down by.  Default is 0.05.  It would take 20 steps to go from 
 		 * 0.0 to 1.0.
 		 */
-		bool TiltDown(float positionOffset = 0.01) {
+		bool TiltDown(float positionOffset = DEFAULT_POSITION_INCREMENT) {
 			float currentPosition = tilt.Get();
 			if (currentPosition == 0.9)
 				return true;
