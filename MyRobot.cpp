@@ -44,7 +44,15 @@
 #include "LightSwitch.cpp"
 #endif
 
+#ifndef POTENTIOMETER_DEFINE
+#define POTENTIOMETER_DEFINE
+#include "Potentiometer.cpp"
+#endif
+
+#ifndef STDIO_DEFINE
+#define STDIO_DEFINE
 #include <stdio.h>
+#endif
 
 // Motor ports configuration.
 static const int PAN_MOTOR  = 9;
@@ -58,6 +66,7 @@ static const float TILT_UP_DIRECTION  = 1.0;
 
 // Sensor port configuration.
 static const int GYRO_PORT = 1;
+static const int POT_PORT  = 7;
 
 // Joystick port configuration
 static const int JOYSTICK_LEFT  = 1;
@@ -66,13 +75,14 @@ static const int JOYSTICK_RIGHT = 2;
 // Main class.
 class MyRobot : public IterativeRobot {
 	
-	CameraServo moveCamera;
-	EasyGyro    gyro;
-	Print       print;
-	EasyCamera  camera;
-	Joystick    joystickLeft;
-	Joystick    joystickRight;
-	LightSwitch testSwitch;
+	CameraServo   moveCamera;
+	EasyGyro      gyro;
+	Print         print;
+	EasyCamera    camera;
+	Joystick      joystickLeft;
+	Joystick      joystickRight;
+	LightSwitch   testSwitch;
+	Potentiometer pot;
 	
 	public:
 		
@@ -83,7 +93,8 @@ class MyRobot : public IterativeRobot {
 			camera(),
 			joystickLeft(JOYSTICK_LEFT),
 			joystickRight(JOYSTICK_RIGHT),
-			testSwitch(14)
+			testSwitch(14),
+			pot(7)
 		{}
 		
 		~MyRobot() {}
@@ -123,7 +134,7 @@ class MyRobot : public IterativeRobot {
 			print.ClearDisplay();
 			
 			char gyroHeading[40];
-			sprintf(gyroHeading, "%f", gyro.GetGyroHeading());
+			sprintf(gyroHeading, "Gyro Value: %f", gyro.GetGyroHeading());
 			print.PrintText(gyroHeading);
 			
 			if (testSwitch.IsOn()) {
@@ -131,6 +142,10 @@ class MyRobot : public IterativeRobot {
 			} else {
 				print.PrintText("Switch is off!");
 			}
+			
+			char potentiometerVoltage[40];
+			sprintf(potentiometerVoltage, "Analog Voltage: %f", pot.GetRawVoltage());
+			print.PrintText(potentiometerVoltage);
 		}
 	
 };

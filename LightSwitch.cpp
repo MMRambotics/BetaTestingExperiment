@@ -22,11 +22,11 @@ class LightSwitch {
 		}
 	
 		bool IsOn() {
-			return (lightSwitch.Get() == true);
+			return (lightSwitch.Get());
 		}
 	
 		bool IsOff() {
-			return (lightSwitch.Get() == false);
+			return (!lightSwitch.Get());
 		}
 	
 };
