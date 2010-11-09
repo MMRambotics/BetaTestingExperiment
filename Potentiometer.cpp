@@ -29,4 +29,8 @@ class Potentiometer {
 			return (pot.GetVoltage() < threshold);
 		}
 		
+		float GetRawVoltage() {
+			return pot.GetVoltage();
+		}
+		
 };
