@@ -100,9 +100,9 @@ class MyRobot : public IterativeRobot {
 		~MyRobot() {}
 	
 		void TeleopInit() {
+			moveCamera.SetToCenter();
 			EnableWatchdog();
 			FeedWatchdog();
-			moveCamera.SetToCenter();
 		}
 		
 		void TeleopPeriodic() {
@@ -120,6 +120,7 @@ class MyRobot : public IterativeRobot {
 		
 		void EnableWatchdog() {
 			GetWatchdog().SetEnabled(true);
+			GetWatchdog().SetExpiration(0.5);
 		}
 		
 		void DisableWatchdog() {
