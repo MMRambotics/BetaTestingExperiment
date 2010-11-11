@@ -54,6 +54,11 @@
 #include <stdio.h>
 #endif
 
+#ifndef HELPER_FUNCTIONS_DEFINE
+#define HELPER_FUNCTIONS_DEFINE
+#include "HelperFunctions.cpp"
+#endif
+
 // Motor ports configuration.
 static const int PAN_MOTOR  = 9;
 static const int TILT_MOTOR = 10;
@@ -65,12 +70,17 @@ static const float PAN_LEFT_DIRECTION = -1.0;
 static const float TILT_UP_DIRECTION  = 1.0;
 
 // Sensor port configuration.
-static const int GYRO_PORT = 1;
-static const int POT_PORT  = 7;
+static const int GYRO_PORT   = 1;
+static const int POT_PORT    = 7;
+static const int SWITCH_PORT = 14;
 
 // Joystick port configuration
 static const int JOYSTICK_LEFT  = 1;
 static const int JOYSTICK_RIGHT = 2;
+
+// Potentiometer voltage configuration.
+static const float UPPER_BOUND_VOLTAGE = 4.956;
+static const float LOWER_BOUND_VOLTAGE = 0.0005;
 
 // Main class.
 class MyRobot : public IterativeRobot {
@@ -83,6 +93,7 @@ class MyRobot : public IterativeRobot {
 	Joystick      joystickRight;
 	LightSwitch   testSwitch;
 	Potentiometer pot;
+	Helper        helper;
 	
 	public:
 		
@@ -93,8 +104,9 @@ class MyRobot : public IterativeRobot {
 			camera(),
 			joystickLeft(JOYSTICK_LEFT),
 			joystickRight(JOYSTICK_RIGHT),
-			testSwitch(14),
-			pot(7)
+			testSwitch(SWITCH_PORT),
+			pot(POT_PORT, LOWER_BOUND_VOLTAGE, UPPER_BOUND_VOLTAGE),
+			helper()
 		{}
 		
 		~MyRobot() {}
@@ -147,6 +159,11 @@ class MyRobot : public IterativeRobot {
 			char potentiometerVoltage[40];
 			sprintf(potentiometerVoltage, "Analog Voltage: %f", pot.GetRawVoltage());
 			print.PrintText(potentiometerVoltage);
+			
+			char potentiometerPosition[40];
+			float currentPosition = helper.closeBounds(pot.CalculatePosition());
+			sprintf(potentiometerPosition, "Position: %.2f%%", currentPosition);
+			print.PrintText(potentiometerPosition);
 		}
 	
 };
