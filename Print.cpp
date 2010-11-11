@@ -35,10 +35,22 @@ class Print {
 			currentLine   = 0;
 		}
 		
+		void ClearDisplay() {
+			currentLine = 0;
+			driverStation->Clear(); 
+		}
+		
 		void PrintText(char *text) {
-			// todo: actually iterate currentLine
 			driverStation->Printf(userLines[currentLine], 1, text);
 			driverStation->UpdateLCD();
+
+			IncrementCurrentDisplayLine();
+		}
+		
+	private:
+		
+		void IncrementCurrentDisplayLine() {
+			currentLine = (currentLine == 5) ? 0 : currentLine + 1;
 		}
 		
 };

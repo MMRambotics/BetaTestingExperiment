@@ -35,17 +35,19 @@ class EasyCamera {
 			cameraFeedState.RegisterState(SUBMIT_FRAME, 1);
 		}
 		
-		void GetImage() {
+		HSLImage GetImage() {
 			int i = cameraFeedState.GetCurrentState(SUBMIT_FRAME);
 			if (i == 3) {
+				cameraFeedState.ResetState(SUBMIT_FRAME);
 				AxisCamera &camera = AxisCamera::GetInstance();
 				if (camera.IsFreshImage()) {
 					HSLImage *image = camera.GetImage();
+					return *image;
 				}
-				cameraFeedState.ResetState(SUBMIT_FRAME);
 			} else {
 				cameraFeedState.ChangeState(SUBMIT_FRAME, i + 1);
 			}
+			return NULL;
 		}
 		
 };
