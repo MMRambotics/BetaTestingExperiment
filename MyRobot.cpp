@@ -115,16 +115,18 @@ class MyRobot : public IterativeRobot {
 			pot(POT_PORT, LOWER_BOUND_VOLTAGE, UPPER_BOUND_VOLTAGE),
 			helper(),
 			compass(COMPASS_PORT)
-		{}
+		{
+			DisableWatchdog();
+		}
 		
 		~MyRobot() {}
 	
 		void TeleopInit() {
+			DisableWatchdog();
 			moveCamera.SetToCenter();
+			
 			EnableWatchdog();
 			FeedWatchdog();
-			
-			moveCamera.SetToCenter();
 		}
 		
 		void TeleopPeriodic() {
