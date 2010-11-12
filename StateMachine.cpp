@@ -5,8 +5,7 @@
  */
 
 // Includes:
-#include <map>
-#include <vector>
+#include "WPILibrary.h"
 
 // Namespaces:
 using namespace std;

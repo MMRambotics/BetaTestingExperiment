@@ -6,15 +6,7 @@
  * methods.
  */
 
-#ifndef WPILIB_DEFINE
-#define WPILIB_DEFINE
-#include "WPILib.h"
-#endif
-
-#ifndef DRIVER_STATION_LCD_DEFINE
-#define DRIVER_STATION_LCD_DEFINE
-#include "DriverStationLCD.h"
-#endif
+#include "WPILibrary.h"
 
 class Print {
 	

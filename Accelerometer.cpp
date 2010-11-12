@@ -6,10 +6,7 @@
  */
 
 // Includes
-#ifndef WPILIB_DEFINE
-#define WPILIB_DEFINE
-#include "WPILib.h"
-#endif
+#include "WPILibrary.h"
 
 // Accelerometer configuration
 static const float SENSITIVITY = 0.3;

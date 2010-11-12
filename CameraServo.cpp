@@ -6,15 +6,8 @@
  */
 
 // Includes
-#ifndef WPILIB_DEFINE
-#define WPILIB_DEFINE
-#include "WPILib.h"
-#endif
-
-#ifndef STATE_MACHINE_DEFINE
-#define STATE_MACHINE_DEFINE
-#include "StateMachine.cpp"
-#endif
+#include "WPILibrary.h"
+#include "StateMachine.h"
 
 // State Machine constants.
 static const int CAMERA_MOVEMENT = 1;

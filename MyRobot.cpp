@@ -9,65 +9,17 @@
 #define DEBUG 
 
 // Includes
-#ifndef WPILIB_DEFINE
-#define WPILIB_DEFINE
-#include "WPILib.h"
-#endif
-
-#ifndef STATE_MACHINE_DEFINE
-#define STATE_MACHINE_DEFINE
-#include "StateMachine.cpp"
-#endif
-
-#ifndef CAMERA_SERVO_DEFINE
-#define CAMERA_SERVO_DEFINE
-#include "CameraServo.cpp"
-#endif
-
-#ifndef CAMERA_DEFINE
-#define CAMERA_DEFINE
-#include "Camera.cpp"
-#endif
-
-#ifndef GYRO_DEFINE
-#define GYRO_DEFINE
-#include "Gyro.cpp"
-#endif
-
-#ifndef PRINT_DEFINE
-#define PRINT_DEFINE
-#include "Print.cpp"
-#endif
-
-#ifndef LIGHT_SWITCH_DEFINE
-#define LIGHT_SWITCH_DEFINE
-#include "LightSwitch.cpp"
-#endif
-
-#ifndef POTENTIOMETER_DEFINE
-#define POTENTIOMETER_DEFINE
-#include "Potentiometer.cpp"
-#endif
-
-#ifndef STDIO_DEFINE
-#define STDIO_DEFINE
-#include <stdio.h>
-#endif
-
-#ifndef HELPER_FUNCTIONS_DEFINE
-#define HELPER_FUNCTIONS_DEFINE
-#include "HelperFunctions.cpp"
-#endif
-
-#ifndef COMPASS_DEFINE
-#define COMPASS_DEFINE
-#include "Compass.cpp"
-#endif
-
-#ifndef ACCEL_DEFINE
-#define ACCEL_DEFINE
-#include "Accel.cpp"
-#endif
+#include "Accelerometer.h"
+#include "Camera.h"
+#include "CameraServo.h"
+#include "Compass.h"
+#include "Gyro.h"
+#include "HelperFunctions.h"
+#include "LightSwitch.h"
+#include "Potentiometer.h"
+#include "Print.h"
+#include "StateMachine.h"
+#include "WPILibrary.h"
 
 // Motor ports configuration.
 static const int PAN_MOTOR  = 9;
@@ -123,7 +75,7 @@ class MyRobot : public IterativeRobot {
 			pot(POT_PORT, LOWER_BOUND_VOLTAGE, UPPER_BOUND_VOLTAGE),
 			helper(),
 			compass(COMPASS_PORT),
-			accel(ACCELX_PORT,ACCELY_PORT)
+			accel(ACCELX_PORT, ACCELY_PORT)
 		{
 			DisableWatchdog();
 		}
