@@ -24,34 +24,34 @@ the WPI library in Wind River.
 	- Core functions: SetSensitivity, SetZero, GetAcceleration
 - AnalogChannel
 	- Getting a voltage from a potentiometer.
-	- Core functions: GetVoltage
+	- Core functions: *GetVoltage*
 - AxisCamera
 	- Getting a camera feed on the dashboard.
 	- Customized dashboard and configuration of the Axis Camera was required for
 	 optimal performance.
 		- Removed unnecessary graphs from the Dashboard.
 		- Set the Axis Camera to 10FPS.
-	- Core functions: GetInstance (includes constructor), WriteResolution, 
-	 WriteBrightness, WriteCompression, GetImage, IsFreshImage
+	- Core functions: *GetInstance* (includes constructor), *WriteResolution*, 
+	 *WriteBrightness*, *WriteCompression*, *GetImage*, *IsFreshImage*
 - DigitalInput
 	- Getting the current state of a switch.
-	- Core functions: Get
+	- Core functions: *Get*
 - DriverStationLCD
 	- Printing to the driver station User Messages.
-	- Core functions: GetInstance (includes constructor), Clear, PrintfLine, 
-	 Printf, UpdateLCD
+	- Core functions: *GetInstance* (includes constructor), *Clear*, *PrintfLine*, 
+	 *Printf*, *UpdateLCD*
 	- Used the kUserLine_x Line constants. 
 - Gyro
 	- Getting the robot's current _relative_ heading.
-	- Core functions: GetAngle
+	- Core functions: *GetAngle*
 - HiTechnicCompass
 	- Getting the robot's current _absolute_ heading.
 	- Watchdog problems...
-	- Core functions: GetAngle
+	- Core functions: *GetAngle*
 - Joystick
 	- Using two joysticks on the Driver Station computer (Classmate or development
 	 PC).
-	- Core functions: GetRawButton
+	- Core functions: *GetRawButton*
 - Servo
 	- Moving the pan and tilt gimbal via 270 degree servos.
-	- Core functions: Set, Get
+	- Core functions: *Set*, *Get*
