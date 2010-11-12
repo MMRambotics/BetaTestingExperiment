@@ -64,6 +64,11 @@
 #include "Compass.cpp"
 #endif
 
+#ifndef ACCEL_DEFINE
+#define ACCEL_DEFINE
+#include "Accel.cpp"
+#endif
+
 // Motor ports configuration.
 static const int PAN_MOTOR  = 9;
 static const int TILT_MOTOR = 10;
@@ -79,6 +84,8 @@ static const int GYRO_PORT    = 1;
 static const int POT_PORT     = 7;
 static const int SWITCH_PORT  = 14;
 static const int COMPASS_PORT = 1;
+static const int ACCELX_PORT = 2;
+static const int ACCELY_PORT = 3;
 
 // Joystick port configuration
 static const int JOYSTICK_LEFT  = 1;
@@ -101,6 +108,7 @@ class MyRobot : public IterativeRobot {
 	Potentiometer pot;
 	Helper        helper;
 	EasyCompass   compass;
+	EasyAccel 	  accel;
 	
 	public:
 		
@@ -114,7 +122,8 @@ class MyRobot : public IterativeRobot {
 			testSwitch(SWITCH_PORT),
 			pot(POT_PORT, LOWER_BOUND_VOLTAGE, UPPER_BOUND_VOLTAGE),
 			helper(),
-			compass(COMPASS_PORT)
+			compass(COMPASS_PORT),
+			accel(ACCELX_PORT,ACCELY_PORT)
 		{
 			DisableWatchdog();
 		}
