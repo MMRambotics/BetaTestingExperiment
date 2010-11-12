@@ -5,7 +5,7 @@
  */
 
 // Includes:
-#include "WPILibrary.h"
+#include "Headers/WPILibrary.h"
 
 // Namespaces:
 using namespace std;

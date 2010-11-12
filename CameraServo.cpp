@@ -6,8 +6,8 @@
  */
 
 // Includes
-#include "WPILibrary.h"
-#include "StateMachine.h"
+#include "Headers/StateMachine.h"
+#include "Headers/WPILibrary.h"
 
 // State Machine constants.
 static const int CAMERA_MOVEMENT = 1;

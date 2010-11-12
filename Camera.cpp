@@ -5,8 +5,8 @@
  * @description: Code that controls the camera feed.
  */
 
-#include "WPILibrary.h"
-#include "StateMachine.h"
+#include "Headers/StateMachine.h"
+#include "Headers/WPILibrary.h"
 
 class EasyCamera {
 

@@ -5,7 +5,7 @@
  * @description: Grabs a value from a potentiometer.
  */
 
-#include "WPILibrary.h"
+#include "Headers/WPILibrary.h"
 
 class Potentiometer {
 	

@@ -1,4 +1,4 @@
 #ifndef ACCELEROMETER_DEFINE
 #define ACCELEROMETER_DEFINE
-#include "Accelerometer.cpp"
+#include "../Accelerometer.cpp"
 #endif

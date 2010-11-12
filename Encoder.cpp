@@ -5,7 +5,7 @@
  * @description: Easy encoder class.
  */
 
-#include "WPILibrary.h"
+#include "Headers/WPILibrary.h"
 
 class EasyEncoder {
 	

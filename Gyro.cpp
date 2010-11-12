@@ -5,7 +5,7 @@
  * @description: Gyro abstraction.
  */
 
-#include "WPILibrary.h"
+#include "Headers/WPILibrary.h"
 
 class EasyGyro {
 	

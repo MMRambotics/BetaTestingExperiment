@@ -5,7 +5,7 @@
  * @description: Monitors a light switch (digital input).
  */
 
-#include "WPILibrary.h"
+#include "Headers/WPILibrary.h"
 
 class LightSwitch {
 

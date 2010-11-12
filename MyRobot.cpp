@@ -9,17 +9,17 @@
 #define DEBUG 
 
 // Includes
-#include "Accelerometer.h"
-#include "Camera.h"
-#include "CameraServo.h"
-#include "Compass.h"
-#include "Gyro.h"
-#include "HelperFunctions.h"
-#include "LightSwitch.h"
-#include "Potentiometer.h"
-#include "Print.h"
-#include "StateMachine.h"
-#include "WPILibrary.h"
+#include "Headers/Accelerometer.h"
+#include "Headers/Camera.h"
+#include "Headers/CameraServo.h"
+#include "Headers/Compass.h"
+#include "Headers/Gyro.h"
+#include "Headers/HelperFunctions.h"
+#include "Headers/LightSwitch.h"
+#include "Headers/Potentiometer.h"
+#include "Headers/Print.h"
+#include "Headers/StateMachine.h"
+#include "Headers/WPILibrary.h"
 
 // Motor ports configuration.
 static const int PAN_MOTOR  = 9;

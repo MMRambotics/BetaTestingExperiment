@@ -5,7 +5,7 @@
  * @description: Class for using gear tooth sensors.
  */
 
-#include "WPILibrary.h"
+#include "Headers/WPILibrary.h"
 
 class EasyGearTooth {
 	

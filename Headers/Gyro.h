@@ -1,4 +1,4 @@
 #ifndef GYRO_DEFINE
 #define GYRO_DEFINE
-#include "Gyro.cpp"
+#include "../Gyro.cpp"
 #endif

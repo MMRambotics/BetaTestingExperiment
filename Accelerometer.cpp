@@ -6,7 +6,7 @@
  */
 
 // Includes
-#include "WPILibrary.h"
+#include "Headers/WPILibrary.h"
 
 // Accelerometer configuration
 static const float SENSITIVITY = 0.3;

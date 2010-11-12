@@ -6,7 +6,7 @@
  * methods.
  */
 
-#include "WPILibrary.h"
+#include "Headers/WPILibrary.h"
 
 class Print {
 	

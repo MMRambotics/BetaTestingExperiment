@@ -5,7 +5,7 @@
  * @description: Easy class wrapper for HiTechnic compass.
  */
 
-#include "WPILibrary.h"
+#include "Headers/WPILibrary.h"
 
 class EasyCompass {
 	
