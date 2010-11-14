@@ -11,6 +11,9 @@
 // Accelerometer configuration
 static const float SENSITIVITY = 0.3;
 
+/* 
+ * Wrapper class for Accelerometer to abstract implicit computing.
+ */
 class EasyAccel {
 	Accelerometer AccelX;
 	Accelerometer AccelY;
@@ -22,10 +25,9 @@ class EasyAccel {
 		{
 			AccelX.SetSensitivity(SENSITIVITY);
 			AccelY.SetSensitivity(SENSITIVITY);
-		}
-		
-		void Zero(){
+			
 			AccelX.SetZero(0.0);
+			AccelY.SetZero(0.0);
 		}
 		
 		float GetXAccel() {
@@ -35,5 +37,5 @@ class EasyAccel {
 		float GetYAccel() {
 			return AccelY.GetAcceleration();
 		}
-	
+		
 };
