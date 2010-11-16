@@ -19,6 +19,7 @@
 #include "Headers/Potentiometer.h"
 #include "Headers/Print.h"
 #include "Headers/StateMachine.h"
+#include "Headers/Pneumatic.h"
 #include "Headers/WPILibrary.h"
 
 // Motor ports configuration.
@@ -36,8 +37,8 @@ static const int GYRO_PORT    = 1;
 static const int POT_PORT     = 7;
 static const int SWITCH_PORT  = 14;
 static const int COMPASS_PORT = 1;
-static const int ACCELX_PORT = 2;
-static const int ACCELY_PORT = 3;
+static const int ACCELX_PORT  = 2;
+static const int ACCELY_PORT  = 3;
 
 // Joystick port configuration
 static const int JOYSTICK_LEFT  = 1;
@@ -46,6 +47,14 @@ static const int JOYSTICK_RIGHT = 2;
 // Potentiometer voltage configuration.
 static const float UPPER_BOUND_VOLTAGE = 4.956;
 static const float LOWER_BOUND_VOLTAGE = 0.0005;
+
+// Solenoid port configuration.
+static const int IN_PORT  = 1;
+static const int OUT_PORT = 2;
+
+// States
+static const int PNEUMATIC_HOLD_STATE = 1;
+static const int PNEUMATIC_THRESHOLD  = 200;
 
 // Main class.
 class MyRobot : public IterativeRobot {
@@ -61,6 +70,8 @@ class MyRobot : public IterativeRobot {
 	Helper        helper;
 	EasyCompass   compass;
 	EasyAccel 	  accel;
+	EasyPneumatic pneumatic;
+	StateMachine  robotState;
 	
 	public:
 		
@@ -75,9 +86,12 @@ class MyRobot : public IterativeRobot {
 			pot(POT_PORT, LOWER_BOUND_VOLTAGE, UPPER_BOUND_VOLTAGE),
 			helper(),
 			compass(COMPASS_PORT),
-			accel(ACCELX_PORT, ACCELY_PORT)
+			accel(ACCELX_PORT, ACCELY_PORT),
+			pneumatic(IN_PORT, OUT_PORT),
+			robotState()
 		{
 			DisableWatchdog();
+			robotState.RegisterState(PNEUMATIC_HOLD_STATE, 1);
 		}
 		
 		~MyRobot() {}
@@ -95,6 +109,14 @@ class MyRobot : public IterativeRobot {
 			
 			camera.GetImage();
 			moveCamera.JoystickControl(joystickLeft);
+			
+			int currentState = robotState.GetCurrentState(PNEUMATIC_HOLD_STATE);
+			if (currentState == PNEUMATIC_THRESHOLD) {
+				robotState.ResetState(PNEUMATIC_HOLD_STATE);
+				pneumatic.Toggle();
+			} else {
+				robotState.ChangeState(PNEUMATIC_HOLD_STATE, currentState + 1);
+			}
 			
 			#ifdef DEBUG
 			Debug();
