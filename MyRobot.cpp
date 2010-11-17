@@ -68,10 +68,12 @@ class MyRobot : public IterativeRobot {
 	LightSwitch   testSwitch;
 	Potentiometer pot;
 	Helper        helper;
-	EasyCompass   compass;
+	//EasyCompass   compass;
 	EasyAccel 	  accel;
 	EasyPneumatic pneumatic;
 	StateMachine  robotState;
+	Relay         compressor;
+	DigitalInput  pressureSwitch;
 	
 	public:
 		
@@ -85,13 +87,14 @@ class MyRobot : public IterativeRobot {
 			testSwitch(SWITCH_PORT),
 			pot(POT_PORT, LOWER_BOUND_VOLTAGE, UPPER_BOUND_VOLTAGE),
 			helper(),
-			compass(COMPASS_PORT),
+			//compass(COMPASS_PORT),
 			accel(ACCELX_PORT, ACCELY_PORT),
 			pneumatic(IN_PORT, OUT_PORT),
-			robotState()
+			robotState(),
+			compressor(1),
+			pressureSwitch(1)
 		{
 			DisableWatchdog();
-			robotState.RegisterState(PNEUMATIC_HOLD_STATE, 1);
 		}
 		
 		~MyRobot() {}
@@ -105,22 +108,21 @@ class MyRobot : public IterativeRobot {
 		}
 		
 		void TeleopPeriodic() {
-			FeedWatchdog();
-			
-			camera.GetImage();
-			moveCamera.JoystickControl(joystickLeft);
-			
-			int currentState = robotState.GetCurrentState(PNEUMATIC_HOLD_STATE);
-			if (currentState == PNEUMATIC_THRESHOLD) {
-				robotState.ResetState(PNEUMATIC_HOLD_STATE);
-				pneumatic.Toggle();
-			} else {
-				robotState.ChangeState(PNEUMATIC_HOLD_STATE, currentState + 1);
+			while (IsOperatorControl()) {
+				FeedWatchdog();
+				
+				camera.GetImage();
+				moveCamera.JoystickControl(joystickLeft);
+				
+				if (pressureSwitch.Get())
+					compressor.Set(Relay::kOff);
+				else
+					compressor.Set(Relay::kOn);
+				
+				#ifdef DEBUG
+				Debug();
+				#endif
 			}
-			
-			#ifdef DEBUG
-			Debug();
-			#endif
 		}
 		
 	private:
@@ -159,10 +161,10 @@ class MyRobot : public IterativeRobot {
 			float currentPosition = helper.closeBounds(pot.CalculatePosition());
 			sprintf(potentiometerPosition, "Position: %.2f%%", currentPosition);
 			print.PrintText(potentiometerPosition);
-			
+			/*
 			char compassHeading[40];
 			sprintf(compassHeading, "Compass Reading: %f", compass.GetHeading());
-			print.PrintText(compassHeading);
+			print.PrintText(compassHeading);*/
 		}
 	
 };
