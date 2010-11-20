@@ -12,14 +12,12 @@
 #include "Headers/Accelerometer.h"
 #include "Headers/Camera.h"
 #include "Headers/CameraServo.h"
-#include "Headers/Compass.h"
 #include "Headers/Gyro.h"
 #include "Headers/HelperFunctions.h"
 #include "Headers/LightSwitch.h"
 #include "Headers/Potentiometer.h"
 #include "Headers/Print.h"
 #include "Headers/StateMachine.h"
-#include "Headers/Pneumatic.h"
 #include "Headers/WPILibrary.h"
 
 // Motor ports configuration.
@@ -68,12 +66,8 @@ class MyRobot : public IterativeRobot {
 	LightSwitch   testSwitch;
 	Potentiometer pot;
 	Helper        helper;
-	//EasyCompass   compass;
 	EasyAccel 	  accel;
-	EasyPneumatic pneumatic;
 	StateMachine  robotState;
-	Relay         compressor;
-	DigitalInput  pressureSwitch;
 	
 	public:
 		
@@ -87,12 +81,8 @@ class MyRobot : public IterativeRobot {
 			testSwitch(SWITCH_PORT),
 			pot(POT_PORT, LOWER_BOUND_VOLTAGE, UPPER_BOUND_VOLTAGE),
 			helper(),
-			//compass(COMPASS_PORT),
 			accel(ACCELX_PORT, ACCELY_PORT),
-			pneumatic(IN_PORT, OUT_PORT),
-			robotState(),
-			compressor(1),
-			pressureSwitch(1)
+			robotState()
 		{
 			DisableWatchdog();
 		}
@@ -113,11 +103,6 @@ class MyRobot : public IterativeRobot {
 				
 				camera.GetImage();
 				moveCamera.JoystickControl(joystickLeft);
-				
-				if (pressureSwitch.Get())
-					compressor.Set(Relay::kOff);
-				else
-					compressor.Set(Relay::kOn);
 				
 				#ifdef DEBUG
 				Debug();
@@ -161,10 +146,6 @@ class MyRobot : public IterativeRobot {
 			float currentPosition = helper.closeBounds(pot.CalculatePosition());
 			sprintf(potentiometerPosition, "Position: %.2f%%", currentPosition);
 			print.PrintText(potentiometerPosition);
-			/*
-			char compassHeading[40];
-			sprintf(compassHeading, "Compass Reading: %f", compass.GetHeading());
-			print.PrintText(compassHeading);*/
 		}
 	
 };
