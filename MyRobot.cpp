@@ -19,6 +19,7 @@
 #include "Headers/Print.h"
 #include "Headers/StateMachine.h"
 #include "Headers/WPILibrary.h"
+#include "Pneumatics.h"
 
 // Motor ports configuration.
 static const int PAN_MOTOR  = 9;
@@ -50,24 +51,26 @@ static const float LOWER_BOUND_VOLTAGE = 0.0005;
 static const int IN_PORT  = 1;
 static const int OUT_PORT = 2;
 
-// States
-static const int PNEUMATIC_HOLD_STATE = 1;
-static const int PNEUMATIC_THRESHOLD  = 200;
+// Pneumatic compressor port configuration.
+static const int PRESSURE_SWITCH_PORT  = 1;
+static const int COMPRESSOR_RELAY_PORT = 1;
 
 // Main class.
 class MyRobot : public IterativeRobot {
 	
-	CameraServo   moveCamera;
-	EasyGyro      gyro;
-	Print         print;
-	EasyCamera    camera;
-	Joystick      joystickLeft;
-	Joystick      joystickRight;
-	LightSwitch   testSwitch;
-	Potentiometer pot;
-	Helper        helper;
-	EasyAccel 	  accel;
-	StateMachine  robotState;
+	CameraServo     moveCamera;
+	EasyGyro        gyro;
+	Print           print;
+	EasyCamera      camera;
+	Joystick        joystickLeft;
+	Joystick        joystickRight;
+	LightSwitch     testSwitch;
+	Potentiometer   pot;
+	Helper          helper;
+	EasyAccel 	    accel;
+	StateMachine    robotState;
+	PneumaticPiston piston;
+	PneumaticCompressor compressor;
 	
 	public:
 		
@@ -82,7 +85,9 @@ class MyRobot : public IterativeRobot {
 			pot(POT_PORT, LOWER_BOUND_VOLTAGE, UPPER_BOUND_VOLTAGE),
 			helper(),
 			accel(ACCELX_PORT, ACCELY_PORT),
-			robotState()
+			robotState(),
+			piston(IN_PORT, OUT_PORT),
+			compressor(PRESSURE_SWITCH_PORT, COMPRESSOR_RELAY_PORT)
 		{
 			DisableWatchdog();
 		}
@@ -103,6 +108,8 @@ class MyRobot : public IterativeRobot {
 				
 				camera.GetImage();
 				moveCamera.JoystickControl(joystickLeft);
+				
+				compressor.CheckAndEngageCompressor();
 				
 				#ifdef DEBUG
 				Debug();
