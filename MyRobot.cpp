@@ -110,6 +110,7 @@ class MyRobot : public IterativeRobot {
 				moveCamera.JoystickControl(joystickLeft);
 				
 				compressor.CheckAndEngageCompressor();
+				piston.EngageIfTrigger(joystickLeft);
 				
 				#ifdef DEBUG
 				Debug();
